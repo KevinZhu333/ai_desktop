@@ -56,19 +56,19 @@ curl -X POST http://10.1.12.3:8000/ai_agent \
 
 ```mermaid
 flowchart TD
-    A[POST /ai_agent] --> B[Chat.chat(...)]
+    A[POST /ai_agent] --> B["Chat.chat(...)"]
     B --> C{Intent?}
-    C -- Device command --> D[ARGlassesIntentDetector<br/>gemini-2.5-flash]
+    C -- Device command --> D["ARGlassesIntentDetector<br/>gemini-2.5-flash"]
     D --> E[Return normalized intent JSON]
     C -- Not supported/none --> F[Dispatcher.function_call]
-    F --> G[ContextService tools<br/>(location, time, weather,<br/>stocks, navigation,<br/>image, google search)]
-    F --> H[MemoryService<br/>(Mem0 cloud)]
-    F --> I[ObjectBox DB<br/>(local embeddings)]
-    G --> J[ExchangeMessages<br/>(LLM with tools)]
+    F --> G["ContextService tools<br/>(location, time, weather,<br/>stocks, navigation,<br/>image, google search)"]
+    F --> H["MemoryService<br/>(Mem0 cloud)"]
+    F --> I["ObjectBox DB<br/>(local embeddings)"]
+    G --> J["ExchangeMessages<br/>(LLM with tools)"]
     H --> J
     I --> J
     J --> K[Answer JSON + updated history]
-    K --> L[Extraction.extracting(...): post-run memory/reminders update]
+    K --> L["Extraction.extracting(...): post-run memory/reminders update"]
     L --> M[Close ObjectBox store]
 ```
 
